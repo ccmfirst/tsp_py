@@ -22,13 +22,12 @@ class TS(Data):
 
         # 禁忌长度
         # taboo_len = round(math.pow(self.city_num * (self.city_num - 1) / 2, 0.5))
-        taboo_len = 30
+        taboo_len = 5
         # 邻域解
         candidate_num = np.zeros((self.candidates, self.city_num))
 
-        # 产生初始解
-        s0 = np.arange(self.city_num)
-        random.shuffle(s0)
+        # 贪婪算法 产生初始解
+        s0 = solve.init_solution()
 
         # 全局最优解
         bsf = np.zeros((len(s0), 1))
@@ -138,7 +137,8 @@ class TS(Data):
             p += 1
 
         # 绘图
-        solve.result(bsf, global_best)
+        solve.draw_fit(global_best)
+        solve.draw_routes(bsf)
 
         # 输出最优解
         best = solve.fun(bsf)
