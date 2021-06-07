@@ -15,7 +15,7 @@ class TS(Data):
         # self.solve = Solve()
 
     def run(self):
-        solve = Solve(self.cities, self.locations, self.load_net)
+        solve = Solve(self.cities, self.locations, self.load_net, 'TS')
 
         # 禁忌列表
         taboo_list = np.zeros((self.city_num, self.city_num))

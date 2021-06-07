@@ -18,7 +18,7 @@ class ALNS(Data):
         return copy.deepcopy()
 
     def run(self):
-        solve = Solve(self.cities, self.locations, self.load_net)
+        solve = Solve(self.cities, self.locations, self.load_net, 'ALNS')
         solution = solve.init_solution()
         current_fit = solve.fun(solution)
         best_solution = solution.copy()

@@ -5,14 +5,19 @@ import numpy as np
 
 
 class Solve():
-    plt.rcParams['font.sans-serif'] = ['AR PL UKai CN']  # 用来正常显示中文标签
-    plt.rcParams['axes.unicode_minus'] = False  # 用来正常显示负号
+    # plt.rcParams['font.sans-serif'] = ['AR PL UKai CN']  # 用来正常显示中文标签
+    # plt.rcParams['axes.unicode_minus'] = False  # 用来正常显示负号
+    plt.rcParams['font.sans-serif'] = ['Arial Unicode MS']
+    plt.rcParams['font.size'] = 12  # 字体大小
+    plt.rcParams['axes.unicode_minus'] = False  # 正常显示负号
 
-    def __init__(self, cities, locations, load_net):
+
+    def __init__(self, cities, locations, load_net, name):
         self.cities = cities
         self.locations = locations
         self.load_net = load_net
         self.city_num = cities.shape[0]
+        self.name = name
 
     def fun(self, s):
         dis = 0
@@ -28,7 +33,7 @@ class Solve():
         plt.plot(x, fits, color='r')
         plt.xlabel('迭代次数')
         plt.ylabel('目标函数值')
-        plt.title('ALNS求解TSP')
+        plt.title(self.name +'求解TSP')
         plt.show()
 
     def draw_routes(self, s):
@@ -49,7 +54,7 @@ class Solve():
         for i in range(len(s)):
             plt.annotate(self.cities[int(s[i])][0], xy=(data[i, 0], data[i, 1]), xycoords='data', xytext=(+5, +1),
                          textcoords="offset points")
-
+        plt.title(self.name + '求解TSP')
         plt.show()
 
     def init_solution(self):
@@ -79,7 +84,7 @@ if __name__ == '__main__':
     load = '../data/load_net'
     data = Data(city, location, load)
     # Solve(1, 2).result([1, 2, 3], [1, 2, 3])
-    solve = Solve(data.cities, data.locations, data.load_net)
+    solve = Solve(data.cities, data.locations, data.load_net, 'TS')
     ind = solve.init_solution()
     fit = solve.fun(ind)
     print(fit)
